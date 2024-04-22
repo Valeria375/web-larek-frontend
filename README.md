@@ -53,3 +53,27 @@ yarn build
 - Отвечает за связь между представлением и данными.
 - Включает методы, обрабатывающие события элементов представления
 - содержит ссылки на Modal и View
+  
+## Карточка товара
+```ts
+ interface CardIf {
+	id: string;
+	description: string;
+	image: string;
+	title: string;
+	category: string;
+	price: number;
+}
+```
+## Список товаров в корзине
+```ts
+interface OrderIf {
+	email: string;
+	phone: string;
+	address: string;
+	payment: string;
+	total: number;
+	items: string[];
+}
+```
+
