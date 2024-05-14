@@ -1,9 +1,14 @@
-import { Modal } from "./modal";
+import { Modal } from './modal';
+import { cloneTemplate, ensureElement } from './utils/utils';
 
- class ModalPreview extends Modal{
+export class ModalPreview extends Modal {
+    previewContent:HTMLTemplateElement;
 
-    constructor(container: HTMLElement){
-        super(container);
-        const page = container
-    }
- }
+	constructor() {
+		super();
+		const cardPreviewTemplate =
+			ensureElement<HTMLTemplateElement>('#card-preview');
+		this.previewContent = cloneTemplate(cardPreviewTemplate);
+        this._content.appendChild(this.previewContent);
+	}
+}

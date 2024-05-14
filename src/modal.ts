@@ -6,12 +6,12 @@ export class Modal {
     protected _content: HTMLElement;
     protected container: HTMLElement;
 
-    constructor( container: HTMLElement) {
-        this.container = container;
-        this._closeButton = ensureElement<HTMLButtonElement>('.modal__close', container);
-        this._content = ensureElement<HTMLElement>('.modal__content', container);
+    constructor() {
+        this.container = ensureElement<HTMLElement>('#modal-container');
+        this._closeButton = ensureElement<HTMLButtonElement>('.modal__close', this.container);
+        this._content = ensureElement<HTMLElement>('.modal__content', this.container);
         this._closeButton.addEventListener('click', this.close.bind(this));
-        this.container.addEventListener('click', this.close.bind(this));
+        // this.container.addEventListener('click', this.close.bind(this));
     }
     set content(value: HTMLElement) {
         this._content.replaceChildren(value);

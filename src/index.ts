@@ -33,6 +33,11 @@ console.log('Hello');
 import { Card } from './Card';
 import { Modal } from './modal';
 import { ProductAPI } from './api';
+import { ModalPreview } from './modalPreview';
+import { ModalOrder } from './modalOrder';
+import { ModalContact } from './modalContact';
+import {  modalBasket } from './modalBasket';
+import { ModalSuccess } from './modalSuccess';
 const card_example1 = new Card(cloneTemplate(cardCatalogTemplate));
 gallery.appendChild(card_example1.HtmlItem);
 card_example1.title = 'My tihfhf1';
@@ -49,6 +54,10 @@ basket.addEventListener('click', () => {
 // const bask = new Modal(ensureElement<HTMLElement>('.basket'));
 // bask.open;
 
-const modal = new Modal(ensureElement<HTMLElement>('#modal-container'));
-modal.open();
+// const modal1 = new  modalBasket();
+// modal1.open();
+// modal1.addItem('klfkjef', 500);
+// modal1.addItem('hjfaewfjer', 9393);
 
+const modal = new  ModalPreview();
+modal.open();
