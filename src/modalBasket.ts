@@ -12,7 +12,6 @@ export class modalBasket extends Modal {
 		super();
 		const basketTemplate = ensureElement<HTMLTemplateElement>('#basket');
 		// this.basketContent = ensureElement<HTMLElement>('.basket__list', basketTemplate);
-
 		// const cardBasketTemplate =
 		// 	ensureElement<HTMLTemplateElement>('#card-basket');
 		// this.basketContent.appendChild(cloneTemplate(cardBasketTemplate))

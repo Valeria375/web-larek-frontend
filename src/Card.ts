@@ -1,4 +1,6 @@
-import * as utils from './utils/utils';
+import { ModalPreview } from './modalPreview';
+// import * as utils from './utils/utils';
+import { cloneTemplate, ensureElement } from './utils/utils';
 
 export class Card {
 	protected _title: HTMLElement;
@@ -7,12 +9,16 @@ export class Card {
 	protected _category: HTMLSpanElement;
 	protected _price: HTMLSpanElement;
 	protected _description?: HTMLElement;
-    protected _HtmlItem: HTMLElement;
+	protected _HtmlItem: HTMLElement;
 
-	constructor(container: HTMLElement) {
-        this._HtmlItem = container
-		this._title = utils.ensureElement<HTMLElement>(`.card__title`, container);
-		this._price = utils.ensureElement<HTMLSpanElement>(`.card__price`, container);
+	constructor() {
+		const cardCatalogTemplate =
+			ensureElement<HTMLTemplateElement>('#card-catalog');
+
+	const container= cloneTemplate(cardCatalogTemplate);
+		this._HtmlItem = container;
+		this._title = ensureElement<HTMLElement>(`.card__title`, container);
+		this._price = ensureElement<HTMLSpanElement>(`.card__price`, container);
 		this._category = container.querySelector(`.card__category`);
 		this._button = container.querySelector(`.card__button`);
 		this._image = container.querySelector(`.card__image`);
@@ -22,20 +28,26 @@ export class Card {
 	set title(value: string) {
 		this._title.innerText = value;
 	}
-    get HtmlItem()
-    {
-        return this._HtmlItem;
-    }
-    set price(value: number) {
-        this._price.innerText = `стоит  ${value} синапсы`;
-    }
-    set category (value: string) {
-        this._category.innerHTML = value;
-    }
-	set image (value: string) {
-        this._image.src = value;
-    }
-    set description (value: string) {
-        this._description.innerText = value;
-    }
+	get HtmlItem() {
+		return this._HtmlItem;
+	}
+	set price(value: number) {
+		this._price.innerText = `стоит  ${value} синапсы`;
+	}
+	set category(value: string) {
+		this._category.innerHTML = value;
+	}
+	set image(value: string) {
+		this._image.src = value;
+	}
+	set description(value: string) {
+		this._description.innerText = value;
+	}
+	openPreview() {
+		this._HtmlItem.addEventListener('click', () => {
+			// const modal = new  ModalPreview();
+			// modal.open();
+			alert('ghbdtn');
+		});
+	}
 }
