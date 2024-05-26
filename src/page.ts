@@ -13,7 +13,7 @@ export class page {
 	addCard(item: ICard) {
 		const card = new Card();
 		card.category = item.category;
-		card.description = item.description;
+		// card.description = item.description;
 		card.image = item.image;
 		card.price = item.price;
 		card.title = item.title;

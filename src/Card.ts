@@ -22,7 +22,8 @@ export class Card {
 		this._category = container.querySelector(`.card__category`);
 		this._button = container.querySelector(`.card__button`);
 		this._image = container.querySelector(`.card__image`);
-		this._description = container.querySelector(`.card__text`);
+		// this._description = ensureElement<HTMLElement>(`.card__text`, container);
+		// container.querySelector(`.card__text`);
 	}
 
 	set title(value: string) {
