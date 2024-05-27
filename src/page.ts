@@ -2,6 +2,7 @@ import { ensureElement } from './utils/utils';
 import { ICard } from './types';
 import { Card } from './Card';
 import { EventEmitter } from './components/base/events';
+import { frontendAplication } from './frontendAplication';
 //менять цифру товаров в корзине + добавлять карточку
 export class page {
 	gallery: HTMLTemplateElement;
@@ -13,11 +14,15 @@ export class page {
 	addCard(item: ICard) {
 		const card = new Card();
 		card.category = item.category;
-		// card.description = item.description;
+		card.description = item.description;
 		card.image = item.image;
 		card.price = item.price;
 		card.title = item.title;
 		this.gallery.appendChild(card.HtmlItem);
+		card.HtmlItem.addEventListener('click', () => {
+			// frontendAplication.openModalPreview(item);
+            this.events.emit('cardClick', item)
+		});
 	}
 	addCardFn(
 		category: string,
@@ -28,13 +33,13 @@ export class page {
 	) {
 		const card = new Card();
 		card.category = category;
-		// card.description = description;
+		card.description = description;
 		card.image = image;
 		card.price = price;
 		card.title = title;
 		this.gallery.appendChild(card.HtmlItem);
 	}
-    init(){
-        this.events.emit('page:init');
-    }
+	init() {
+		this.events.emit('page:init');
+	}
 }

@@ -14,7 +14,8 @@ export class Card {
 	constructor() {
 		const cardCatalogTemplate =
 			ensureElement<HTMLTemplateElement>('#card-catalog');
-
+			const cardPreviewTemplate = ensureElement<HTMLTemplateElement>('#card-preview');
+const previewContainer =cloneTemplate(cardPreviewTemplate);
 	const container= cloneTemplate(cardCatalogTemplate);
 		this._HtmlItem = container;
 		this._title = ensureElement<HTMLElement>(`.card__title`, container);
@@ -22,7 +23,7 @@ export class Card {
 		this._category = container.querySelector(`.card__category`);
 		this._button = container.querySelector(`.card__button`);
 		this._image = container.querySelector(`.card__image`);
-		// this._description = ensureElement<HTMLElement>(`.card__text`, container);
+		this._description = ensureElement<HTMLElement>(`.card__text`, previewContainer);
 		// container.querySelector(`.card__text`);
 	}
 
