@@ -54,7 +54,7 @@ export class ModalPreview extends Modal {
 		this.open();
 	}
 	addToBasket() {
-		this.addButtonToBasket.addEventListener('click', () => {
+		/* this.addButtonToBasket.addEventListener('click', () => {
 			// 	const card = ensureElement<HTMLElement>('.card', this.previewContent);
 			const modal = new modalBasket();
 			const title = ensureElement<HTMLElement>(
@@ -65,9 +65,11 @@ export class ModalPreview extends Modal {
 				'.card__price',
 				this.previewContent
 			);
-			modal.addItem(title.innerText, Number(price.innerText));
-		});
+			modal.addItem(title.innerText, Number(price.innerText)); */
+		/* }); */
+		
 	}
+	
 	set title(value: string) {
 		this.titlePreview.innerText = value;
 	}

@@ -1,4 +1,5 @@
 import { Modal } from './modal';
+import { ICard } from './types';
 import { ensureElement, cloneTemplate } from './utils/utils';
 
 export class modalBasket extends Modal {
@@ -38,7 +39,24 @@ export class modalBasket extends Modal {
         this.basketContent.appendChild(item);
     this.basketPriceHTMLElement.innerText=String(this.totalPrice)+' синапсов';
     }
-
+addItemInterface(item:ICard){
+    this.itemCount ++;
+    const cardBasketTemplate = ensureElement<HTMLTemplateElement>('#card-basket');
+    const cardItem= cloneTemplate(cardBasketTemplate);
+    const index = ensureElement<HTMLElement>('.basket__item-index', cardItem);
+    const price = ensureElement<HTMLElement>('.card__price', cardItem);
+    const title = ensureElement<HTMLElement>('.card__title', cardItem);
+    const deleteButton = ensureElement<HTMLElement>('.basket__item-delete', cardItem)
+    index.innerText = String(this.itemCount);
+    title.innerText = item.title;
+    price.innerText =String(item.price) + ' синапсов';;
+    this.totalPrice += item.price;
+    this.basketContent.appendChild(cardItem);
+    this.basketPriceHTMLElement.innerText=String(this.totalPrice)+' синапсов';
+    deleteButton.addEventListener('click', ()=>{
+        alert(item.title);
+    })
+}
 }
 //  export class ModalCardBasket extends modalBasket{
 //     basketContent: HTMLTemplateElement;
