@@ -1,3 +1,4 @@
+import { EventEmitter } from './components/base/events';
 import { Modal } from './modal';
 import { modalBasket } from './modalBasket';
 import { ICard } from './types';
@@ -12,6 +13,7 @@ export class ModalPreview extends Modal {
 	addButtonToBasket: HTMLElement;
 	categoryPreview: HTMLElement;
 	cardInterface: ICard;
+	events: EventEmitter;
 	constructor() {
 		super();
 		const cardPreviewTemplate =
@@ -43,6 +45,21 @@ export class ModalPreview extends Modal {
 		);
 
 		this._content.appendChild(this.previewContent);
+		this.events = new EventEmitter();
+		this.addButtonToBasket.addEventListener('click', () => {
+			this.events.emit('addToBasketClick', this.cardInterface)
+			/* // 	const card = ensureElement<HTMLElement>('.card', this.previewContent);
+			const modal = new modalBasket();
+			const title = ensureElement<HTMLElement>(
+				'.card__title',
+				this.previewContent
+			);
+			const price = ensureElement<HTMLElement>(
+				'.card__price',
+				this.previewContent
+			);
+			modal.addItem(title.innerText, Number(price.innerText)); */
+		});
 	}
 	openForCard(item: ICard) {
 		this.cardInterface = item;
@@ -54,22 +71,9 @@ export class ModalPreview extends Modal {
 		this.open();
 	}
 	addToBasket() {
-		/* this.addButtonToBasket.addEventListener('click', () => {
-			// 	const card = ensureElement<HTMLElement>('.card', this.previewContent);
-			const modal = new modalBasket();
-			const title = ensureElement<HTMLElement>(
-				'.card__title',
-				this.previewContent
-			);
-			const price = ensureElement<HTMLElement>(
-				'.card__price',
-				this.previewContent
-			);
-			modal.addItem(title.innerText, Number(price.innerText)); */
-		/* }); */
 		
 	}
-	
+
 	set title(value: string) {
 		this.titlePreview.innerText = value;
 	}

@@ -10,6 +10,10 @@ export class page {
 	constructor() {
 		this.gallery = ensureElement<HTMLTemplateElement>('.gallery');
 		this.events = new EventEmitter();
+		const basket = ensureElement<HTMLTemplateElement>('.header__basket');
+		basket.addEventListener('click', () => {
+			this.events.emit('basketClick');
+		});
 	}
 	addCard(item: ICard) {
 		const card = new Card();
@@ -21,7 +25,7 @@ export class page {
 		this.gallery.appendChild(card.HtmlItem);
 		card.HtmlItem.addEventListener('click', () => {
 			// frontendAplication.openModalPreview(item);
-            this.events.emit('cardClick', item)
+			this.events.emit('cardClick', item);
 		});
 	}
 	addCardFn(

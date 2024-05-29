@@ -4,7 +4,7 @@ import { API_URL, CDN_URL } from './utils/constants';
 import { EventEmitter } from './components/base/events';
 import { Api, ApiListResponse } from './components/base/api';
 import { IOrder, IOrderResults } from './types';
-const basket = ensureElement<HTMLTemplateElement>('.header__basket');
+/* const basket = ensureElement<HTMLTemplateElement>('.header__basket'); */
 // const basket = document.querySelector('.header__basket');
 
 const cardPrTemplate = cloneTemplate<HTMLTemplateElement>('#card-preview');
@@ -52,12 +52,7 @@ import { frontendAplication } from './frontendAplication';
 // card_example2.category = 'друг';
 // // card_example2.image = './images/example.png';
 
-basket.addEventListener('click', () => {
-	// const modalBasket = document.querySelector('#modal-container');
-	// const newM = new Modal(cardBasketTemplate, .on);
-	const mod = new modalBasket();
-	mod.open();
-});
+
 
 // const bask = new Modal(ensureElement<HTMLElement>('.basket'));
 // bask.open;

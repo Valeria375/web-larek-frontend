@@ -1,3 +1,4 @@
+import { EventEmitter } from './components/base/events';
 import { Modal } from './modal';
 import { ICard } from './types';
 import { ensureElement, cloneTemplate } from './utils/utils';
@@ -8,6 +9,7 @@ export class modalBasket extends Modal {
     itemCount: number;
     totalPrice: number;
     basketPriceHTMLElement:HTMLElement;
+    events: EventEmitter;
 	// modalWindow:HTMLTemplateElement
 	constructor() {
 		super();
@@ -23,6 +25,9 @@ export class modalBasket extends Modal {
 		this.itemCount = 0;
         this.totalPrice = 0;
 		this._content.appendChild(this.basketTemp);
+        this.events = new EventEmitter();
+        
+        
 		// this._content.appendChild(this.basketContent);
 	}
     addItem(title_in:string, price_in: number){
@@ -56,6 +61,9 @@ addItemInterface(item:ICard){
     deleteButton.addEventListener('click', ()=>{
         alert(item.title);
     })
+}
+init(){
+    this.events.emit('onLoard');
 }
 }
 //  export class ModalCardBasket extends modalBasket{
