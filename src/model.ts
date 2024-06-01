@@ -33,6 +33,13 @@ export class model {
 			console.log(item.title);
 		}
 	}
+	removeFromBasket(item: ICard) {
+		// this.basketList = this.basketList.filter(item => item.id !== id);
+		const index = this.basketList.indexOf(item, 0);
+		if (index > -1) {
+			this.basketList.splice(index, 1);
+		}
+	}
 	getBasketList() {
 		return this.basketList;
 	}

@@ -45,5 +45,6 @@ export class page {
 	}
 	init() {
 		this.events.emit('page:init');
+		
 	}
 }

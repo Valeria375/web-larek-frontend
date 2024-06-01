@@ -1,5 +1,6 @@
 import { modalBasket } from './modalBasket';
 import { model } from './model';
+import { ICard } from './types';
 
 export class modalBasketPresenter {
 	viewRef: modalBasket;
@@ -9,12 +10,20 @@ export class modalBasketPresenter {
 		this.viewRef = view;
 		this.modelRef = appModel;
 		this.viewRef.events.on('onLoard', this.formLoardCallBack.bind(this));
+		this.viewRef.events.on(
+			'deleteCardFromBasket',
+			this.deleteItemCallBack.bind(this)
+		);
 	}
 	private formLoardCallBack() {
 		const cardsArray = this.modelRef.getBasketList();
 		for (const card of cardsArray) {
 			this.viewRef.addItemInterface(card);
 		}
-       /*  alert('hello') */
+		
+	}
+	private deleteItemCallBack(card: ICard) {
+		this.modelRef.removeFromBasket(card);
+		// alert('deleteCard');
 	}
 }

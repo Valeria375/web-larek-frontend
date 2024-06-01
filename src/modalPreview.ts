@@ -16,6 +16,11 @@ export class ModalPreview extends Modal {
 	events: EventEmitter;
 	constructor() {
 		super();
+
+		this.events = new EventEmitter();
+	}
+
+	preOpenCallBack() {
 		const cardPreviewTemplate =
 			ensureElement<HTMLTemplateElement>('#card-preview');
 		this.previewContent = cloneTemplate(cardPreviewTemplate);
@@ -45,9 +50,9 @@ export class ModalPreview extends Modal {
 		);
 
 		this._content.appendChild(this.previewContent);
-		this.events = new EventEmitter();
+
 		this.addButtonToBasket.addEventListener('click', () => {
-			this.events.emit('addToBasketClick', this.cardInterface)
+			this.events.emit('addToBasketClick', this.cardInterface);
 			/* // 	const card = ensureElement<HTMLElement>('.card', this.previewContent);
 			const modal = new modalBasket();
 			const title = ensureElement<HTMLElement>(
@@ -61,18 +66,17 @@ export class ModalPreview extends Modal {
 			modal.addItem(title.innerText, Number(price.innerText)); */
 		});
 	}
+
 	openForCard(item: ICard) {
+		this.open();
 		this.cardInterface = item;
 		this.title = item.title;
 		this.price = item.price;
 		this.category = item.category;
 		this.image = item.image;
 		this.description = item.description;
-		this.open();
 	}
-	addToBasket() {
-		
-	}
+	addToBasket() {}
 
 	set title(value: string) {
 		this.titlePreview.innerText = value;
