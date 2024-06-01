@@ -43,4 +43,7 @@ export class model {
 	getBasketList() {
 		return this.basketList;
 	}
+	getBasketCount() {
+		return this.basketList.length;
+	}
 }

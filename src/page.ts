@@ -7,13 +7,18 @@ import { frontendAplication } from './frontendAplication';
 export class page {
 	gallery: HTMLTemplateElement;
 	events: EventEmitter;
+	private basketCounter: HTMLElement;
 	constructor() {
 		this.gallery = ensureElement<HTMLTemplateElement>('.gallery');
 		this.events = new EventEmitter();
 		const basket = ensureElement<HTMLTemplateElement>('.header__basket');
+		this.basketCounter = ensureElement<HTMLElement>('.header__basket-counter');
 		basket.addEventListener('click', () => {
 			this.events.emit('basketClick');
 		});
+	}
+	set basketCount(value: number) {
+		this.basketCounter.innerText = String(value);
 	}
 	addCard(item: ICard) {
 		const card = new Card();
@@ -45,6 +50,9 @@ export class page {
 	}
 	init() {
 		this.events.emit('page:init');
-		
+		setInterval((): void => {
+			// 	console.log('This will be displayed every 1000ms (1s).');
+			this.events.emit('intervalCounter');
+		}, 1000);
 	}
 }
