@@ -1,31 +1,29 @@
 import { EventEmitter } from './components/base/events';
 import { Modal } from './modal';
+import { ModalOrder } from './modalOrder';
 import { ICard } from './types';
 import { ensureElement, cloneTemplate } from './utils/utils';
 
 export class modalBasket extends Modal {
 	basketTemp: HTMLTemplateElement;
 	basketContent: HTMLElement;
+	busketOrderButton: HTMLButtonElement;
 	itemCount: number;
 	totalPrice: number;
 	basketPriceHTMLElement: HTMLElement;
 	events: EventEmitter;
 	basket: ICard[];
+	order: ModalOrder;
 	// modalWindow:HTMLTemplateElement
 	constructor() {
 		super();
 		this.events = new EventEmitter();
 
-		// this._content.appendChild(this.basketContent);
 	}
 
 	preOpenCallBack() {
 		const basketTemplate = ensureElement<HTMLTemplateElement>('#basket');
-		// this.basketContent = ensureElement<HTMLElement>('.basket__list', basketTemplate);
-		// const cardBasketTemplate =
-		// 	ensureElement<HTMLTemplateElement>('#card-basket');
-		// this.basketContent.appendChild(cloneTemplate(cardBasketTemplate))
-		// this.basketContent =cloneTemplate(cardBasketTemplate)
+	
 		this.basketTemp = cloneTemplate(basketTemplate);
 		this.basketContent = ensureElement<HTMLElement>(
 			'.basket__list',
@@ -35,10 +33,14 @@ export class modalBasket extends Modal {
 			'.basket__price',
 			this.basketTemp
 		);
+		this.busketOrderButton = ensureElement<HTMLButtonElement>(
+			'.button',
+			this.basketTemp
+		);
 		this.itemCount = 0;
 		this.totalPrice = 0;
 		this._content.appendChild(this.basketTemp);
-
+		this.updateOrderButtonState();
 		/* console.log('This is child'); */
 	}
 
@@ -57,6 +59,7 @@ export class modalBasket extends Modal {
 		this.basketContent.appendChild(item);
 		this.basketPriceHTMLElement.innerText =
 			String(this.totalPrice) + ' синапсов';
+		this.updateOrderButtonState();
 	}
 	addItemInterface(item: ICard) {
 		this.itemCount++;
@@ -81,6 +84,7 @@ export class modalBasket extends Modal {
 			this.removeItem(cardItem, item.price);
 			this.events.emit('deleteCardFromBasket', item);
 		});
+		this.updateOrderButtonState();
 	}
 	removeItem(cardItem: HTMLElement, itemPrice: number) {
 		this.itemCount--;
@@ -96,9 +100,27 @@ export class modalBasket extends Modal {
 			itemIndex.innerText = String(index + 1);
 		});
 		this.basketContent.removeChild(cardItem);
+		this.updateOrderButtonState();
 	}
 	init() {
 		this.events.emit('onLoard');
+	}
+	orderButton() {}
+	updateOrderButtonState() {
+		if (this.itemCount > 0) {
+			this.busketOrderButton.disabled = false;
+		} else {
+			this.busketOrderButton.disabled = true;
+			this.orderButtonClick();
+		}
+	}
+	orderButtonClick() {
+		this.busketOrderButton.addEventListener('click', () => {
+			this.close();
+			this.order = new ModalOrder();
+			this.order.open();
+			// alert('orderClick');
+		});
 	}
 }
 //  export class ModalCardBasket extends modalBasket{

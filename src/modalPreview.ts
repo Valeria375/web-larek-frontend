@@ -1,6 +1,7 @@
 import { EventEmitter } from './components/base/events';
 import { Modal } from './modal';
 import { modalBasket } from './modalBasket';
+import { model } from './model';
 import { ICard } from './types';
 import { cloneTemplate, ensureElement } from './utils/utils';
 
@@ -14,10 +15,13 @@ export class ModalPreview extends Modal {
 	categoryPreview: HTMLElement;
 	cardInterface: ICard;
 	events: EventEmitter;
+	modalBasket: modalBasket;
+	basketState:boolean;
 	constructor() {
 		super();
-
 		this.events = new EventEmitter();
+		this.modalBasket = new modalBasket();
+		this.basketState = false;
 	}
 
 	preOpenCallBack() {
@@ -52,7 +56,30 @@ export class ModalPreview extends Modal {
 		this._content.appendChild(this.previewContent);
 
 		this.addButtonToBasket.addEventListener('click', () => {
-			this.events.emit('addToBasketClick', this.cardInterface);
+			// this.events.emit('addToBasketClick', this.cardInterface);
+
+
+			
+			// if (this.isInBasket(this.cardInterface)) {
+			// 	this.events.emit('removeFromBasketClick', this.cardInterface);
+			// 	// this.modalBasket.removeItem(,this.cardInterface.price )
+			// 	// this.removeItem(this.cardInterface);
+			// 	this.updateButton(false);
+			// } else {
+			// 	this.events.emit('addToBasketClick', this.cardInterface);
+			// 	// this.basket.addItemInterface(this.cardInterface);
+			// 	this.updateButton(true);
+			// }
+
+			if (this.basketState) {
+				this.events.emit('removeFromBasketClick', this.cardInterface);
+			} else {
+				this.events.emit('addToBasketClick', this.cardInterface);
+			}
+
+
+			// this.events.emit('removeFromBasketPreview', this.cardInterface);
+			this.close();
 			/* // 	const card = ensureElement<HTMLElement>('.card', this.previewContent);
 			const modal = new modalBasket();
 			const title = ensureElement<HTMLElement>(
@@ -67,8 +94,22 @@ export class ModalPreview extends Modal {
 		});
 	}
 
+	// isInBasket(item: ICard): boolean {
+	// 	return this.modalBasket.basket.some(
+	// 	  (basketItem) => basketItem.id === item.id
+	// 	);}
+
+	updateButton(isInBasket: boolean) {
+		if (isInBasket) {
+			this.addButtonToBasket.innerText = 'Удалить из корзины';
+		} else {
+			this.addButtonToBasket.innerText = 'Добавить в корзину';
+		}
+		this.basketState=isInBasket;
+	}
 	openForCard(item: ICard) {
 		this.open();
+		this.events.emit('infoLoarded', item);
 		this.cardInterface = item;
 		this.title = item.title;
 		this.price = item.price;

@@ -24,7 +24,7 @@ export class Modal {
 	}
 
 	preOpenCallBack() {
-		console.log('This is parent');
+		// console.log('This is parent');
 	}
 
 	open() {

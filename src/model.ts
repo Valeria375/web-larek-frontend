@@ -46,4 +46,11 @@ export class model {
 	getBasketCount() {
 		return this.basketList.length;
 	}
+	isInBasket(item: ICard): boolean {
+		const index = this.basketList.indexOf(item, 0);
+		if (index > -1) {
+			return true;
+		}
+		return false;
+	}
 }
