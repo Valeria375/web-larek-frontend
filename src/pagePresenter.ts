@@ -13,10 +13,24 @@ export class pagePresenter {
 		this.viewRef.events.on('intervalCounter', this.intervalCallBack.bind(this));
 	}
 	private viewInitCallBack() {
-		const arrRef = this.modelRef.getCardInterface();
-		for (const item of arrRef) {
-			this.viewRef.addCard(item);
-		}
+		//const arrRef = this.modelRef.getCardInterface();
+
+		// for (const item of arrRef) {
+		// 	this.viewRef.addCard(item);
+		// }
+
+		this.modelRef.getCardInterface().then(
+			(result: any) => {
+				console.log(`Result is ${result[0].description}`)
+				for (const item of result) {
+					this.viewRef.addCard(item);
+				}
+			},
+			(err: any) => {
+
+			}
+		  );
+
 	}
 	private intervalCallBack() {
 		this.viewRef.basketCount = this.modelRef.getBasketCount();
