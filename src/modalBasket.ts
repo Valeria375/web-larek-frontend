@@ -1,7 +1,7 @@
 import { EventEmitter } from './components/base/events';
 import { Modal } from './modal';
 import { ModalOrder } from './modalOrder';
-import { ICard } from './types';
+import { ICard, IOrder } from './types';
 import { ensureElement, cloneTemplate } from './utils/utils';
 
 export class modalBasket extends Modal {
@@ -14,16 +14,16 @@ export class modalBasket extends Modal {
 	events: EventEmitter;
 	basket: ICard[];
 	order: ModalOrder;
+	orderInfo: IOrder;
 	// modalWindow:HTMLTemplateElement
 	constructor() {
 		super();
 		this.events = new EventEmitter();
-
 	}
 
 	preOpenCallBack() {
 		const basketTemplate = ensureElement<HTMLTemplateElement>('#basket');
-	
+
 		this.basketTemp = cloneTemplate(basketTemplate);
 		this.basketContent = ensureElement<HTMLElement>(
 			'.basket__list',
@@ -41,27 +41,30 @@ export class modalBasket extends Modal {
 		this.totalPrice = 0;
 		this._content.appendChild(this.basketTemp);
 		this.updateOrderButtonState();
+		const defolt: IOrder = { total: 0, items: [] };
+		this.orderInfo = defolt;
 		/* console.log('This is child'); */
 	}
 
-	addItem(title_in: string, price_in: number) {
-		this.itemCount++;
-		const cardBasketTemplate =
-			ensureElement<HTMLTemplateElement>('#card-basket');
-		const item = cloneTemplate(cardBasketTemplate);
-		const index = ensureElement<HTMLElement>('.basket__item-index', item);
-		const price = ensureElement<HTMLElement>('.card__price', item);
-		const title = ensureElement<HTMLElement>('.card__title', item);
-		index.innerText = String(this.itemCount);
-		title.innerText = title_in;
-		price.innerText = String(price_in) + ' синапсов';
-		this.totalPrice += price_in;
-		this.basketContent.appendChild(item);
-		this.basketPriceHTMLElement.innerText =
-			String(this.totalPrice) + ' синапсов';
-		this.updateOrderButtonState();
-	}
+	// addItem(title_in: string, price_in: number) {
+	// 	this.itemCount++;
+	// 	const cardBasketTemplate =
+	// 		ensureElement<HTMLTemplateElement>('#card-basket');
+	// 	const item = cloneTemplate(cardBasketTemplate);
+	// 	const index = ensureElement<HTMLElement>('.basket__item-index', item);
+	// 	const price = ensureElement<HTMLElement>('.card__price', item);
+	// 	const title = ensureElement<HTMLElement>('.card__title', item);
+	// 	index.innerText = String(this.itemCount);
+	// 	title.innerText = title_in;
+	// 	price.innerText = String(price_in) + ' синапсов';
+	// 	this.totalPrice += price_in;
+	// 	this.basketContent.appendChild(item);
+	// 	this.basketPriceHTMLElement.innerText =
+	// 		String(this.totalPrice) + ' синапсов';
+	// 	this.updateOrderButtonState();
+	// }
 	addItemInterface(item: ICard) {
+		this.orderInfo.items.push(item);
 		this.itemCount++;
 		const cardBasketTemplate =
 			ensureElement<HTMLTemplateElement>('#card-basket');
@@ -81,12 +84,16 @@ export class modalBasket extends Modal {
 		this.basketPriceHTMLElement.innerText =
 			String(this.totalPrice) + ' синапсов';
 		deleteButton.addEventListener('click', () => {
-			this.removeItem(cardItem, item.price);
+			this.removeItem(cardItem, item.price, item);
 			this.events.emit('deleteCardFromBasket', item);
 		});
 		this.updateOrderButtonState();
 	}
-	removeItem(cardItem: HTMLElement, itemPrice: number) {
+	removeItem(cardItem: HTMLElement, itemPrice: number, item: ICard) {
+		const index = this.orderInfo.items.indexOf(item, 0);
+		if (index > -1) {
+			this.orderInfo.items.splice(index, 1);
+		}
 		this.itemCount--;
 		this.totalPrice -= itemPrice;
 		this.basketPriceHTMLElement.innerText =
@@ -117,8 +124,10 @@ export class modalBasket extends Modal {
 	orderButtonClick() {
 		this.busketOrderButton.addEventListener('click', () => {
 			this.close();
-			this.order = new ModalOrder();
-			this.order.open();
+			this.orderInfo.total = this.totalPrice;
+			this.events.emit('confirm', this.orderInfo);
+			// this.order = new ModalOrder();
+			// this.order.open();
 			// alert('orderClick');
 		});
 	}

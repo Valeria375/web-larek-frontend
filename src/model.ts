@@ -1,13 +1,14 @@
 import { ICard } from './types';
 import { API_URL, CDN_URL } from './utils/constants';
 import { ProductAPI } from './api';
+import { ensureElement } from './utils/utils';
 
 export class model {
 	basketList: ICard[];
 	api;
 	constructor() {
 		this.basketList = [];
-		this.api =  new ProductAPI(CDN_URL, API_URL);
+		this.api = new ProductAPI(CDN_URL, API_URL);
 	}
 	getCardList() {
 		const cards: string[] = ['red', 'green', 'blue'];
@@ -18,7 +19,7 @@ export class model {
 		//let card: ICard[];
 		//card.push(this.createCard('бусина'));
 		//return card;
-		
+
 		return this.api.getCardList();
 	}
 	createCard(title: string) {
@@ -59,5 +60,13 @@ export class model {
 			return true;
 		}
 		return false;
+	}
+	getBasketTotalPtice() {
+		let totalPrice = 0;
+		this.basketList.forEach((item) => {
+			totalPrice += item.price;
+		});
+		return totalPrice;
+
 	}
 }

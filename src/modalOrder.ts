@@ -1,6 +1,7 @@
 import { EventEmitter } from './components/base/events';
 import { Modal } from './modal';
-import { IOrder } from './types';
+import { ModalContact } from './modalContact';
+import { IOrder, PaymentMethod } from './types';
 import { ensureElement, cloneTemplate } from './utils/utils';
 
 export class ModalOrder extends Modal {
@@ -13,6 +14,8 @@ export class ModalOrder extends Modal {
 	orderInfo: IOrder;
 	events: EventEmitter;
 	PaymentType: Number;
+	modalContact: ModalContact;
+	modalInfo: IOrder;
 	constructor() {
 		super();
 		this.PaymentType = 0;
@@ -25,6 +28,7 @@ export class ModalOrder extends Modal {
 		// 	this.paymentContent
 		// );
 		this.events = new EventEmitter();
+
 		// Add event listener to address input
 
 		// this.addressInput.addEventListener('input', this.updateNextButtonState.bind(this));
@@ -65,25 +69,19 @@ export class ModalOrder extends Modal {
 		this._content.appendChild(this.paymentContent);
 	}
 	updateNextButtonState() {
-		if (this.PaymentType == 0)
-		{
+		if (this.PaymentType == 0) {
 			this.nextButton.disabled = true;
-		}
-		else
-		{
-			if (this.addressInput.value === "")
-			{
+		} else {
+			if (this.addressInput.value === '') {
 				this.nextButton.disabled = true;
-			}
-			else
-			{
+			} else {
 				this.nextButton.disabled = false;
+				this.openContacts();
 			}
 		}
 
 		// console.log(`text check1 ${this.addressInput.value}`)
 		// console.log(`text check ${this.addressInput.value === ""}`)
-
 
 		// if (
 		// 	this.PaymentType !== '' &&
@@ -116,5 +114,29 @@ export class ModalOrder extends Modal {
 	}
 	orderInformation(item: IOrder) {
 		this.address = item.address;
+	}
+	openContacts() {
+		this.nextButton.addEventListener('click', () => {
+			let payment: PaymentMethod = '';
+			if (this.PaymentType === 1) {
+				payment = 'онлайн';
+			} else if (this.PaymentType === 2) {
+				payment = 'при получении';
+			}
+			const result: IOrder = {
+				address: this.addressInput.value,
+				payment: payment,
+				total: this.modalInfo.total,
+				items: this.modalInfo.items
+			};
+			this.close();
+			this.events.emit('openModalContacts', result);
+			// this.modalContact = new ModalContact();
+			// this.modalContact.open();
+		});
+	}
+	openInfo(order: IOrder) {
+		this.modalInfo = order;
+		this.open();
 	}
 }
