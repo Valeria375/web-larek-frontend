@@ -12,9 +12,10 @@ export class ModalOrder extends Modal {
 	buttonCash: HTMLButtonElement;
 	orderInfo: IOrder;
 	events: EventEmitter;
+	PaymentType: Number;
 	constructor() {
 		super();
-
+		this.PaymentType = 0;
 		// const nextBlock = ensureElement<HTMLElement>(
 		// 	'.modal__actions',
 		// 	this.paymentContent
@@ -29,6 +30,7 @@ export class ModalOrder extends Modal {
 		// this.addressInput.addEventListener('input', this.updateNextButtonState.bind(this));
 	}
 	preOpenCallBack() {
+		this.PaymentType = 0;
 		const paymentTemplate = ensureElement<HTMLTemplateElement>('#order');
 		this.paymentContent = cloneTemplate(paymentTemplate);
 		this.nextButton = ensureElement<HTMLButtonElement>(
@@ -54,24 +56,50 @@ export class ModalOrder extends Modal {
 			'.form__input',
 			this.paymentContent
 		);
+
+		this.addressInput.addEventListener('input', () => {
+			this.updateNextButtonState();
+		});
+
 		this.updateNextButtonState();
 		this._content.appendChild(this.paymentContent);
 	}
 	updateNextButtonState() {
-		if (
-			this.addressInput.value !== '' &&
-			this.selectPaymentMethod.arguments !== 0
-		) {
-			this.nextButton.disabled = false;
-		} else {
+		if (this.PaymentType == 0)
+		{
 			this.nextButton.disabled = true;
 		}
+		else
+		{
+			if (this.addressInput.value === "")
+			{
+				this.nextButton.disabled = true;
+			}
+			else
+			{
+				this.nextButton.disabled = false;
+			}
+		}
+
+		// console.log(`text check1 ${this.addressInput.value}`)
+		// console.log(`text check ${this.addressInput.value === ""}`)
+
+
+		// if (
+		// 	this.PaymentType !== '' &&
+		// 	this.selectPaymentMethod.arguments !== 0
+		// ) {
+		// 	this.nextButton.disabled = false;
+		// } else {
+		// 	this.nextButton.disabled = true;
+		// }
 	}
 	set address(value: string) {
 		this.addressInput.value = value;
 		this.updateNextButtonState();
 	}
 	selectPaymentMethod(type: Number) {
+		this.PaymentType = type;
 		if (type === 1) {
 			this.buttonOnline.classList.add('button_alt-active');
 			this.buttonCash.classList.remove('button_alt-active');
