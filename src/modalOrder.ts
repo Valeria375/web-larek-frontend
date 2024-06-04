@@ -1,35 +1,92 @@
+import { EventEmitter } from './components/base/events';
 import { Modal } from './modal';
+import { IOrder } from './types';
 import { ensureElement, cloneTemplate } from './utils/utils';
 
 export class ModalOrder extends Modal {
-    paymentContent: HTMLTemplateElement;
+	paymentContent: HTMLTemplateElement;
 	nextButton: HTMLButtonElement;
 	addressInput: HTMLInputElement;
-    selectedPaymentMethod: HTMLButtonElement | null;
-
+	selectedPaymentMethod: HTMLButtonElement | null;
+	buttonOnline: HTMLButtonElement;
+	buttonCash: HTMLButtonElement;
+	orderInfo: IOrder;
+	events: EventEmitter;
 	constructor() {
 		super();
-		const paymentTemplate = ensureElement<HTMLTemplateElement>('#order');
-		this.nextButton = ensureElement<HTMLButtonElement>('.modal__actions .button', this.paymentContent);
-        this.selectedPaymentMethod = null;
+
+		// const nextBlock = ensureElement<HTMLElement>(
+		// 	'.modal__actions',
+		// 	this.paymentContent
+		// );
+		// this.selectedPaymentMethod = ensureElement<HTMLButtonElement>(
+		// 	'.button_alt',
+		// 	this.paymentContent
+		// );
+		this.events = new EventEmitter();
+		// Add event listener to address input
+
 		// this.addressInput.addEventListener('input', this.updateNextButtonState.bind(this));
+	}
+	preOpenCallBack() {
+		const paymentTemplate = ensureElement<HTMLTemplateElement>('#order');
 		this.paymentContent = cloneTemplate(paymentTemplate);
+		this.nextButton = ensureElement<HTMLButtonElement>(
+			'.order__button',
+			this.paymentContent
+		);
+
+		this.buttonOnline = ensureElement<HTMLButtonElement>(
+			'#card',
+			this.paymentContent
+		);
+		this.buttonCash = ensureElement<HTMLButtonElement>(
+			'#cash',
+			this.paymentContent
+		);
+		this.buttonOnline.addEventListener('click', () => {
+			this.selectPaymentMethod(1);
+		});
+		this.buttonCash.addEventListener('click', () => {
+			this.selectPaymentMethod(2);
+		});
+		this.addressInput = ensureElement<HTMLInputElement>(
+			'.form__input',
+			this.paymentContent
+		);
+		this.updateNextButtonState();
 		this._content.appendChild(this.paymentContent);
 	}
 	updateNextButtonState() {
-        if (this.addressInput.value.trim() !== '' && this.selectedPaymentMethod !== null) {
-            this.nextButton.disabled = false;
-        } else {
-            this.nextButton.disabled = true;
-        }
-    }
-
-    selectPaymentMethod(button: HTMLButtonElement) {
-        if (this.selectedPaymentMethod) {
-            this.selectedPaymentMethod.classList.remove('button__alt-active');
-        }
-        this.selectedPaymentMethod = button;
-        this.selectedPaymentMethod.classList.add('button__alt-active');
-        this.updateNextButtonState();
-    }
+		if (
+			this.addressInput.value !== '' &&
+			this.selectPaymentMethod.arguments !== 0
+		) {
+			this.nextButton.disabled = false;
+		} else {
+			this.nextButton.disabled = true;
+		}
+	}
+	set address(value: string) {
+		this.addressInput.value = value;
+		this.updateNextButtonState();
+	}
+	selectPaymentMethod(type: Number) {
+		if (type === 1) {
+			this.buttonOnline.classList.add('button_alt-active');
+			this.buttonCash.classList.remove('button_alt-active');
+			this.updateNextButtonState();
+		} else if (type === 2) {
+			this.buttonOnline.classList.remove('button_alt-active');
+			this.buttonCash.classList.add('button_alt-active');
+			this.updateNextButtonState();
+		} else {
+			this.buttonOnline.classList.remove('button_alt-active');
+			this.buttonCash.classList.remove('button_alt-active');
+			this.updateNextButtonState();
+		}
+	}
+	orderInformation(item: IOrder) {
+		this.address = item.address;
+	}
 }

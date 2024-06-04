@@ -37,7 +37,7 @@ export class model {
 	addToBasket(item: ICard) {
 		this.basketList.push(item);
 		for (const item of this.basketList) {
-			console.log(item.title);
+			// console.log(item.title);
 		}
 	}
 	removeFromBasket(item: ICard) {

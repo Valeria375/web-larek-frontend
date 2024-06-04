@@ -21,7 +21,7 @@ export class pagePresenter {
 
 		this.modelRef.getCardInterface().then(
 			(result: any) => {
-				console.log(`Result is ${result[0].description}`)
+				// console.log(`Result is ${result[0].description}`)
 				for (const item of result) {
 					this.viewRef.addCard(item);
 				}
