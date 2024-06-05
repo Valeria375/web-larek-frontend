@@ -3,5 +3,5 @@ dist
 .env
 .yarn
 .idea
-.vscode
+#.vscode
 *.log

@@ -5,7 +5,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="theme-color" content="#000000" />
 	<link rel="icon" href="/favicon.ico" />
-	<link rel="manifest" href="/manifest.json" />
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -87,7 +86,7 @@
 						</li>
 					</ul>
 					<div class="modal__actions">
-						<button class="button">Оформить</button>
+						<button class="button" disabled>Оформить</button>
 						<span class="basket__price">153 250 синапсов</span>
 					</div>
 				</div>
@@ -114,7 +113,7 @@
 						</label>
 					</div>
 					<div class="modal__actions">
-						<button disabled class="button">Далее</button>
+						<button disabled class="nextButton">Далее</button>
 					</div>
 				</form>
 			</div>
@@ -171,8 +170,7 @@
 			<h2 class="card__title">+1 час в сутках</h2>
 			<img class="card__image" src="<%=require('../images/Subtract.svg')%>" alt="" />
 			<span class="card__price">750 синапсов</span>
-		</button>
-	</template>
+		</button></template>
 
 	<template id="card-preview">
 		<div class="card card_full">
@@ -215,8 +213,8 @@
 				<div class="order__field">
 					<h2 class="modal__title">Способ оплаты</h2>
 					<div class="order__buttons">
-						<button name="card" type="button" class="button button_alt">Онлайн</button>
-						<button name="cash" type="button" class="button button_alt">При получении</button>
+						<button name="card" id="card" type="button" class="button button_alt">Онлайн</button>
+						<button name="cash" id="cash" type="button" class="button button_alt">При получении</button>
 					</div>
 				</div>
 				<label class="order__field">
@@ -236,15 +234,15 @@
 			<div class="order">
 				<label class="order__field">
 					<span class="form__label modal__title">Email</span>
-					<input name="email" class="form__input" type="text" placeholder="Введите Email" />
+					<input name="email" id="email" class="form__input" type="text" placeholder="Введите Email" />
 				</label>
 				<label class="order__field">
 					<span class="form__label modal__title">Телефон</span>
-					<input name="phone" class="form__input" type="text" placeholder="+7 (" />
+					<input name="phone" id="phone" class="form__input" type="text" placeholder="+7 (" />
 				</label>
 			</div>
 			<div class="modal__actions">
-				<button type="submit" disabled class="button">Оплатить</button>
+				<button type="submit" id="pay" disabled class="button">Оплатить</button>
 				<span class="form__errors"></span>
 			</div>
 		</form>
