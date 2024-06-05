@@ -70,8 +70,8 @@ export class frontendAplication {
 		this.modalWindowOrder.events.on('openModalContacts', (order: IOrder) => {
 			this.modalWindowContact.openInfo(order);
 		});
-		this.modalWindowContact.events.on('openModalSuccess', () => {
-			this.modalWindowSuccess.open();
+		this.modalWindowContact.events.on('openModalSuccess', (order: IOrder) => {
+			this.modalWindowSuccess.openInfo(order);
 		});
 	}
 	start() {

@@ -70,9 +70,7 @@ export class ModalContact extends Modal {
 		this.updatePayButtonState();
 	}
 	openModalSuccess() {
-		
-		this.events.emit('openModalSuccess');
-		
+		this.events.emit('openModalSuccess', this.modalInfo);
 	}
 	openInfo(order: IOrder) {
 		this.modalInfo = order;
