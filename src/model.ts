@@ -1,4 +1,4 @@
-import { ICard } from './types';
+import { ICard, IOrder } from './types';
 import { API_URL, CDN_URL } from './utils/constants';
 import { ProductAPI } from './api';
 import { ensureElement } from './utils/utils';
@@ -67,6 +67,8 @@ export class model {
 			totalPrice += item.price;
 		});
 		return totalPrice;
-
+	}
+	sendOrder(order: IOrder) {
+		return this.api.orderProduct(order);
 	}
 }
