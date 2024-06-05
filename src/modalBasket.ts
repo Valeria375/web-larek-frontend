@@ -64,7 +64,7 @@ export class modalBasket extends Modal {
 	// 	this.updateOrderButtonState();
 	// }
 	addItemInterface(item: ICard) {
-		this.orderInfo.items.push(item);
+		this.orderInfo.items.push(item.id);
 		this.itemCount++;
 		const cardBasketTemplate =
 			ensureElement<HTMLTemplateElement>('#card-basket');
@@ -90,7 +90,7 @@ export class modalBasket extends Modal {
 		this.updateOrderButtonState();
 	}
 	removeItem(cardItem: HTMLElement, itemPrice: number, item: ICard) {
-		const index = this.orderInfo.items.indexOf(item, 0);
+		const index = this.orderInfo.items.indexOf(item.id, 0);
 		if (index > -1) {
 			this.orderInfo.items.splice(index, 1);
 		}
@@ -131,6 +131,7 @@ export class modalBasket extends Modal {
 			// alert('orderClick');
 		});
 	}
+	
 }
 //  export class ModalCardBasket extends modalBasket{
 //     basketContent: HTMLTemplateElement;

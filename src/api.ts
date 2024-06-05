@@ -43,11 +43,12 @@ export class ProductAPI extends Api implements IProductAPI {
 
     orderProduct(order: IOrder): Promise<IOrderResults> {
         return this.post('/order', {
+            items:order.items,
             payment: order.payment,
             email: order.email,
             phone: order.phone,
             address: order.address,
-        
+            total:order.total
         }).then(
             (data: IOrderResults) => data
         );

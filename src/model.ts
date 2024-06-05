@@ -71,4 +71,7 @@ export class model {
 	sendOrder(order: IOrder) {
 		return this.api.orderProduct(order);
 	}
+	clearBasket() {
+		this.basketList = [];
+	}
 }

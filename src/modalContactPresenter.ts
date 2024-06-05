@@ -15,17 +15,18 @@ export class modalContactPresenter {
 	}
 	private completeCallBack(order: IOrder) {
 		console.log(order);
-		this.modelRef.sendOrder(order) .then(
+		this.modelRef.sendOrder(order).then(
 			(result: any) => {
 				// console.log(`Result is ${result[0].description}`)
-				console.log('success order')
+				// console.log('success order');
+				this.viewRef.openModalSuccess();
+				this.modelRef.clearBasket();
 			},
 			(err: any) => {
-				console.log('error order')
+				console.log('error order');
 			}
-		  );
+		);
 
-		
 		// this.viewRef.openModalSuccess();
 	}
 }

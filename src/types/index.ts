@@ -54,7 +54,7 @@ export interface IBasket {
 // Заказ
 export interface IOrder {
 	total?: number;
-	items?: ICard[];
+	items?: string[];
 	email?: string;
 	phone?: string;
 	address?: string;
