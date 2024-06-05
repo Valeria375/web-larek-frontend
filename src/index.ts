@@ -25,7 +25,7 @@ const modalWindow = ensureElement<HTMLElement>('#modal-container');
 const pageBody = document.body;
 const gallery = ensureElement<HTMLTemplateElement>('.gallery');
 
-console.log('Hello');
+// console.log('Hello');
 // const cardPreviewTemplate = ensureElement<HTMLTemplateElement>('#card-preview');
 import { Card } from './Card';
 import { Modal } from './modal';
@@ -36,41 +36,7 @@ import { ModalContact } from './modalContact';
 import { modalBasket } from './modalBasket';
 import { ModalSuccess } from './modalSuccess';
 import { frontendAplication } from './frontendAplication';
-// const card_example1 = new Card();
-// gallery.appendChild(card_example1.HtmlItem);
-// card_example1.title = 'собака';
-// card_example1.price = 4000;
-// // card_example1.description = 'My tiеее';
-// card_example1.category = 'друг';
-// // card_example1.image = '../images/subtract.svg';
 
-// const card_example2 = new Card();
-// gallery.appendChild(card_example2.HtmlItem);
-// card_example2.title = 'мишка';
-// card_example2.price = 4000;
-// // card_example1.description = 'My tiеее';
-// card_example2.category = 'друг';
-// // card_example2.image = './images/example.png';
-
-
-
-// const bask = new Modal(ensureElement<HTMLElement>('.basket'));
-// bask.open;
-
-// const modal1 = new  modalBasket();
-// modal1.open();
-// modal1.addItem('klfkjef', 500);
-// modal1.addItem('hjfaewfjer', 9393);
-
-// const modal = new ModalPreview();
-// modal.open();
-// modal.addToBasket();
-
-// const test: EventEmitter = new EventEmitter();
-// test.on('job', () => {
-// 	alert('Hi from emmiter');
-// });
-// test.emit('hi');
 
 const app = new frontendAplication();
 app.start();
