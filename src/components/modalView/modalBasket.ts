@@ -1,8 +1,8 @@
-import { EventEmitter } from './components/base/events';
-import { Modal } from './modal';
+import { EventEmitter } from '../base/events';
+import { Modal } from '../common/modal';
 import { ModalOrder } from './modalOrder';
-import { ICard, IOrder } from './types';
-import { ensureElement, cloneTemplate } from './utils/utils';
+import { ICard, IOrder } from '../../types';
+import { ensureElement, cloneTemplate } from '../../utils/utils';
 
 export class modalBasket extends Modal {
 	basketTemp: HTMLTemplateElement;

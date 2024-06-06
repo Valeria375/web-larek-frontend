@@ -1,5 +1,5 @@
-import { ModalSuccess } from "./modalSuccess";
-import { model } from "./model";
+import { ModalSuccess } from "../modalView/modalSuccess";
+import { model } from "../common/model";
 
 export class modalSuccessPresenter{
     viewRef: ModalSuccess;

@@ -1,5 +1,5 @@
-import { ModalOrder } from './modalOrder';
-import { model } from './model';
+import { ModalOrder } from '../modalView/modalOrder';
+import { model } from '../common/model';
 
 export class modalOrderPresenter {
 	viewRef: ModalOrder;

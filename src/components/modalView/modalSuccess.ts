@@ -1,7 +1,7 @@
-import { EventEmitter } from './components/base/events';
-import { Modal } from './modal';
-import { IOrder } from './types';
-import { ensureElement, cloneTemplate } from './utils/utils';
+import { EventEmitter } from '../base/events';
+import { Modal } from '../common/modal';
+import { IOrder } from '../../types';
+import { ensureElement, cloneTemplate } from '../../utils/utils';
 
 export class ModalSuccess extends Modal {
 	successContent: HTMLTemplateElement;

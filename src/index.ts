@@ -27,15 +27,15 @@ const gallery = ensureElement<HTMLTemplateElement>('.gallery');
 
 // console.log('Hello');
 // const cardPreviewTemplate = ensureElement<HTMLTemplateElement>('#card-preview');
-import { Card } from './Card';
-import { Modal } from './modal';
-import { ProductAPI } from './api';
-import { ModalPreview } from './modalPreview';
-import { ModalOrder } from './modalOrder';
-import { ModalContact } from './modalContact';
-import { modalBasket } from './modalBasket';
-import { ModalSuccess } from './modalSuccess';
-import { frontendAplication } from './frontendAplication';
+import { Card } from './components/common/Card';
+import { Modal } from './components/common/modal';
+import { ProductAPI } from './components/common/api';
+import { ModalPreview } from './components/modalView/modalPreview';
+import { ModalOrder } from './components/modalView/modalOrder';
+import { ModalContact } from './components/modalView/modalContact';
+import { modalBasket } from './components/modalView/modalBasket';
+import { ModalSuccess } from './components/modalView/modalSuccess';
+import { frontendAplication } from './components/page/frontendAplication';
 
 
 const app = new frontendAplication();

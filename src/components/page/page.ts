@@ -1,7 +1,7 @@
-import { ensureElement } from './utils/utils';
-import { ICard } from './types';
-import { Card } from './Card';
-import { EventEmitter } from './components/base/events';
+import { ensureElement } from '../../utils/utils';
+import { ICard } from '../../types';
+import { Card } from '../common/Card';
+import { EventEmitter } from '../base/events';
 import { frontendAplication } from './frontendAplication';
 //менять цифру товаров в корзине + добавлять карточку
 export class page {

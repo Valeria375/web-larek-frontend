@@ -1,9 +1,9 @@
-import { EventEmitter } from './components/base/events';
-import { Modal } from './modal';
+import { EventEmitter } from '../base/events';
+import { Modal } from '../common/modal';
 import { modalBasket } from './modalBasket';
-import { model } from './model';
-import { ICard } from './types';
-import { cloneTemplate, ensureElement } from './utils/utils';
+import { model } from '../common/model';
+import { ICard } from '../../types';
+import { cloneTemplate, ensureElement } from '../../utils/utils';
 
 export class ModalPreview extends Modal {
 	previewContent: HTMLTemplateElement;

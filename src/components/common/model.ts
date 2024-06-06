@@ -1,7 +1,7 @@
-import { ICard, IOrder } from './types';
-import { API_URL, CDN_URL } from './utils/constants';
+import { ICard, IOrder } from '../../types';
+import { API_URL, CDN_URL } from '../../utils/constants';
 import { ProductAPI } from './api';
-import { ensureElement } from './utils/utils';
+import { ensureElement } from '../../utils/utils';
 
 export class model {
 	basketList: ICard[];

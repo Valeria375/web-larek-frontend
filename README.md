@@ -58,7 +58,25 @@ interface ICard {
 	id:string
 }
 ```
+### Информация о заказе
+``` ts
+interface IOrder {
+	total: number;
+	items: string[];
+	email: string;
+	phone: string;
+	address: string;
+	payment: string;
+}
+```
+### Интерфейс выполнения успешной операции
+``` ts
 
+interface IOrderResults {
+	id: string;
+	total: number;
+}
+```
 
 ## Описание событий
 

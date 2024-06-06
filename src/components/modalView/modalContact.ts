@@ -1,8 +1,8 @@
-import { EventEmitter } from './components/base/events';
-import { Modal } from './modal';
+import { EventEmitter } from '../base/events';
+import { Modal } from '../common/modal';
 import { ModalSuccess } from './modalSuccess';
-import { IOrder } from './types';
-import { ensureElement, cloneTemplate } from './utils/utils';
+import { IOrder } from '../../types';
+import { ensureElement, cloneTemplate } from '../../utils/utils';
 
 export class ModalContact extends Modal {
 	contacts: HTMLTemplateElement;

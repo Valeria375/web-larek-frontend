@@ -1,17 +1,17 @@
-import { modalBasket } from './modalBasket';
-import { modalBasketPresenter } from './modalBasketPresenter';
-import { ModalContact } from './modalContact';
-import { modalContactPresenter } from './modalContactPresenter';
-import { ModalOrder } from './modalOrder';
-import { ModalPreview } from './modalPreview';
-import { modalPreviewPresenter } from './modalPreviewPresenter';
-import { ModalSuccess } from './modalSuccess';
-import { modalSuccessPresenter } from './modalSuccessPresenter';
-import { model } from './model';
-import { modalOrderPresenter } from './modelOrderPresenter';
+import { modalBasket } from '../modalView/modalBasket';
+import { modalBasketPresenter } from '../modalPresenter/modalBasketPresenter';
+import { ModalContact } from '../modalView/modalContact';
+import { modalContactPresenter } from '../modalPresenter/modalContactPresenter';
+import { ModalOrder } from '../modalView/modalOrder';
+import { ModalPreview } from '../modalView/modalPreview';
+import { modalPreviewPresenter } from '../modalPresenter/modalPreviewPresenter';
+import { ModalSuccess } from '../modalView/modalSuccess';
+import { modalSuccessPresenter } from '../modalPresenter/modalSuccessPresenter';
+import { model } from '../common/model';
+import { modalOrderPresenter } from '../modalPresenter/modelOrderPresenter';
 import { page } from './page';
 import { pagePresenter } from './pagePresenter';
-import { ICard, IOrder } from './types';
+import { ICard, IOrder } from '../../types';
 
 export class frontendAplication {
 	mainView: page;

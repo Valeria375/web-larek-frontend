@@ -1,6 +1,6 @@
-import { modalBasket } from './modalBasket';
-import { model } from './model';
-import { ICard } from './types';
+import { modalBasket } from '../modalView/modalBasket';
+import { model } from '../common/model';
+import { ICard } from '../../types';
 
 export class modalBasketPresenter {
 	viewRef: modalBasket;

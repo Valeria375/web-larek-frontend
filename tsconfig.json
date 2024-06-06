@@ -9,6 +9,6 @@
     "moduleResolution": "node",
     "sourceMap": true
   },
-  "include": ["src/**/*.ts", "src/types/*.d.ts"] 
+"include": ["src/**/*.ts", "src/types/*.d.ts"] 
   
 }

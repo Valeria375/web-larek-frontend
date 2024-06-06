@@ -1,6 +1,6 @@
-import { ModalPreview } from './modalPreview';
-import { model } from './model';
-import { ICard } from './types';
+import { ModalPreview } from '../modalView/modalPreview';
+import { model } from '../common/model';
+import { ICard } from '../../types';
 
 export class modalPreviewPresenter {
 	viewRef: ModalPreview;

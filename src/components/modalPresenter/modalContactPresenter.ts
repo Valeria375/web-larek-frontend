@@ -1,6 +1,6 @@
-import { ModalContact } from './modalContact';
-import { model } from './model';
-import { IOrder } from './types';
+import { ModalContact } from '../modalView/modalContact';
+import { model } from '../common/model';
+import { IOrder } from '../../types';
 
 export class modalContactPresenter {
 	viewRef: ModalContact;

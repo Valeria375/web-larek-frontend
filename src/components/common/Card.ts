@@ -1,6 +1,6 @@
-import { ModalPreview } from './modalPreview';
+import { ModalPreview } from '../modalView/modalPreview';
 // import * as utils from './utils/utils';
-import { cloneTemplate, ensureElement } from './utils/utils';
+import { cloneTemplate, ensureElement } from '../../utils/utils';
 
 export class Card {
 	protected _title: HTMLElement;

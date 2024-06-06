@@ -1,8 +1,8 @@
-import { EventEmitter } from './components/base/events';
-import { Modal } from './modal';
+import { EventEmitter } from '../base/events';
+import { Modal } from '../common/modal';
 import { ModalContact } from './modalContact';
-import { IOrder, PaymentMethod } from './types';
-import { ensureElement, cloneTemplate } from './utils/utils';
+import { IOrder, PaymentMethod } from '../../types';
+import { ensureElement, cloneTemplate } from '../../utils/utils';
 
 export class ModalOrder extends Modal {
 	paymentContent: HTMLTemplateElement;
