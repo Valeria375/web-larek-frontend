@@ -14,16 +14,21 @@ export class Card {
 	constructor() {
 		const cardCatalogTemplate =
 			ensureElement<HTMLTemplateElement>('#card-catalog');
-			const cardPreviewTemplate = ensureElement<HTMLTemplateElement>('#card-preview');
-const previewContainer =cloneTemplate(cardPreviewTemplate);
-	const container= cloneTemplate(cardCatalogTemplate);
+		const cardPreviewTemplate =
+			ensureElement<HTMLTemplateElement>('#card-preview');
+		const previewContainer = cloneTemplate(cardPreviewTemplate);
+		const container = cloneTemplate(cardCatalogTemplate);
 		this._HtmlItem = container;
 		this._title = ensureElement<HTMLElement>(`.card__title`, container);
 		this._price = ensureElement<HTMLSpanElement>(`.card__price`, container);
 		this._category = container.querySelector(`.card__category`);
 		this._button = container.querySelector(`.card__button`);
 		this._image = container.querySelector(`.card__image`);
-		this._description = ensureElement<HTMLElement>(`.card__text`, previewContainer);
+		this._description = ensureElement<HTMLElement>(
+			`.card__text`,
+			previewContainer
+		);
+		// this.noPriceProduct(this.price);
 		// container.querySelector(`.card__text`);
 	}
 
@@ -33,8 +38,13 @@ const previewContainer =cloneTemplate(cardPreviewTemplate);
 	get HtmlItem() {
 		return this._HtmlItem;
 	}
-	set price(value: number) {
-		this._price.innerText = `стоит  ${value} синапсы`;
+	set price(value: number | null) {
+		if (value === null) {
+			this._price.innerText = 'Бесценный товар';
+		} else {
+			this._price.innerText = `стоит  ${value} синапсы`;
+		}
+		
 	}
 	set category(value: string) {
 		this._category.innerHTML = value;
@@ -52,4 +62,5 @@ const previewContainer =cloneTemplate(cardPreviewTemplate);
 			alert('ghbdtn');
 		});
 	}
+	
 }
