@@ -102,31 +102,35 @@ interface IOrderResults {
 * Events - экзепляр класса EventsEmitter для обработки событий
 
 ### Методы класса
-* AddItemCard(item:ICard)
-* RemoveItemCard(item:ICard)
+* AddCard(item:ICard)
+* init()
 
 
-## Описание класса CardModalWindow
+## Описание класса CardPreview
 ### Свойства класса
+* preOpenCallBack - загрузка данных
+ 
 * ImageContainer:HTMLElement - Контейнер картинки;
 * PriceLabel:HTMLElement - Поле с ценой;
 * DescriptionLabel - Поле с описанием;
 * Events - экзепляр класса EventsEmitter для обработки событий
 
 ### Методы класса
-* AddToBasket(item:ICard)
-* SetPrice(value:string)
-* SetDescription(value:string)
+* updateButton(isInBasket: boolean)
+* openForCard(item: ICard)
+* AddToBasket()
 
-## Описание класса BasketModalWindow
+
+## Описание класса ModalBasket
 ### Свойства класса
 * CardsConainer:HTMLElement - Контейнер элемнтов товара
 * Events - экзепляр класса EventsEmitter для обработки событий
 
 ### Методы класса
-* AddItem(data:ICard) 
-* RemoveItem(data:ICard)
-* Reload(void)
+* addItemInterface(item: ICard)
+* removeItem(cardItem: HTMLElement, itemPrice: number, item: ICard)
+* updateOrderButtonState()
+* orderButtonClick()
 
 ## Описание класса PagePresenter
 ### Свойства класса
@@ -136,14 +140,14 @@ interface IOrderResults {
 ### Методы класса
 * constructor(view:PageView, model:Model) - инициализация событий формы
 
-## Описание класса CardModalPresenter
+## Описание класса ModalPreviewPresenter
 ### Свойства класса
 * view:CardModalWindow - объект представления
 * model:Model - экземпляр класса модели
 ### Методы класса
 * constructor(view:CardModalWindow, model:Model) - инициализация событий формы
 
-## Описание класса BasketModalPresenter
+## Описание класса ModalBasketPresenter
 ### Свойства класса
 * view:BasketModalWindow - объект представления
 * model:Model - экземпляр класса модели
@@ -162,7 +166,7 @@ interface IOrderResults {
 * AddToBasket(item:ICard) - добавить указанный товар в корзину;
 * RemoveFromBasket(item:ICard) - удалить указанный товар из корзину;
 
-## Описание класса ViewApp
+## Описание класса ViewApplication
 ### Свойства класса
 * MainPage:PageView - объект главной страницы;
 * MainPresenter:PagePresenter - объект представителя страницы;

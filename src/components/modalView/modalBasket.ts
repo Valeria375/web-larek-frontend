@@ -112,7 +112,7 @@ export class modalBasket extends Modal {
 	init() {
 		this.events.emit('onLoard');
 	}
-	orderButton() {}
+	
 	updateOrderButtonState() {
 		if (this.itemCount > 0) {
 			this.busketOrderButton.disabled = false;
@@ -133,14 +133,4 @@ export class modalBasket extends Modal {
 	}
 	
 }
-//  export class ModalCardBasket extends modalBasket{
-//     basketContent: HTMLTemplateElement;
-//     constructor() {
-// 		super();
-// 		// const basketTemplate = ensureElement<HTMLTemplateElement>('#basket');
-// 		const cardBasketTemplate =
-// 			ensureElement<HTMLTemplateElement>('#card-basket');
-// 		this.basketContent = cloneTemplate(cardBasketTemplate);
-// 		this._content.appendChild(this.basketContent);
-// 	}
-//  }
+
