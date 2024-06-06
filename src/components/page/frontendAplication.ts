@@ -77,9 +77,4 @@ export class frontendAplication {
 	start() {
 		this.mainView.init();
 	}
-	// static openModalPreview(item:ICard){
-	//     const modalWindowPreview = new  ModalPreview(item);
-
-	//     modalWindowPreview.open();
-	// }
 }
